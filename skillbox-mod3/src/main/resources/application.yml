@@ -1,0 +1,12 @@
+server:
+  port: ${SERVER_PORT:8080}
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/contacts}
+    username: postgres
+    password: postgres
+    hikari:
+      schema: contacts_schema
+environment:
+  create: ${CREATE_CONTACTS:2}
+

@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  client-backend:
+    image: list-contact:latest
+    ports:
+      - "8085:8085"
+    depends_on:
+      - postgres
+    environment:
+      - SERVER_PORT=8085
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres/contacts
+      - CREATE_CONTACTS=2
+  postgres:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=contacts
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  db_data:
