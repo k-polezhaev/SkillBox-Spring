@@ -1,0 +1,47 @@
+package com.example.mod4.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.Instant;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity(name = "comments")
+public class Comment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String body;
+
+    @CreationTimestamp
+    private Instant createdAt;
+
+    @UpdateTimestamp
+    private Instant updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @ToString.Exclude
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "news_id", nullable = false)
+    @ToString.Exclude
+    private News news;
+
+    public Comment(Long id, String body, Instant createdAt, Instant updatedAt, User byId, News byId1) {
+    }
+
+    public Comment setId(Long id) {
+        this.id = id;
+        return this;
+    }
+}

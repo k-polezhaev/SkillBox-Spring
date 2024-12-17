@@ -1,0 +1,35 @@
+package com.example.mod4.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity(name = "news_categories")
+public class NewsCategory {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @Builder.Default
+    private List<News> news = new ArrayList<>();
+
+    public NewsCategory(Long id, String name, Object o) {
+    }
+
+    public NewsCategory setId(Long id) {
+        this.id = id;
+        return this;
+    }
+}
