@@ -1,0 +1,6 @@
+app:
+  load-students-on-start:
+    enabled: true
+    students-list-filename: /home/shimolin_ap@drsk.ru/skillbox/spring/students/src/main/resources/studentslist.json
+
+
